@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import supabase, { supabaseUrl } from "./supabase";
 
-export async function getCabins(params) {
+export async function getCabins() {
   const { data: cabins, error } = await supabase.from("cabins").select("*");
 
   if (error) {
@@ -20,7 +20,7 @@ export async function createEditCabin(newCabin, id) {
     ""
   );
   const imagePatch = hasImagePath
-    ? newCabin.imagePatch
+    ? newCabin.image
     : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
 
   // 1. Creating/editing cabin
@@ -44,6 +44,8 @@ export async function createEditCabin(newCabin, id) {
   }
 
   // 2. Uploading image
+  if (hasImagePath) return data;
+
   const { error: storageError } = await supabase.storage
     .from("cabin-images")
     .upload(imageName, newCabin.image);
