@@ -5,6 +5,7 @@ import useGetCabins from "./useGetCabins";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import { useSearchParams } from "react-router-dom";
+import Empty from "../../ui/Empty";
 
 // const Table = styled.div`
 //   border: 1px solid var(--color-grey-200);
@@ -33,6 +34,8 @@ import { useSearchParams } from "react-router-dom";
 function CabinTable() {
   const { isLoading, cabins } = useGetCabins();
   const [searchParams] = useSearchParams();
+
+  //if (!cabins.length) return <Empty resourceName="cabins" />;
 
   if (isLoading) return <Spinner />;
 
@@ -67,7 +70,7 @@ function CabinTable() {
         </Table.Header>
 
         <Table.Body
-          data={filteredCabins}
+          data={sortedCabins}
           render={(cabin) => <CabinRow cabin={cabin} key={cabin.id} />}
         />
       </Table>
