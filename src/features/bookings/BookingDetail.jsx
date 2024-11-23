@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import styled from "styled-components";
 
 import BookingDataBox from "./BookingDataBox";
@@ -38,7 +39,7 @@ function BookingDetail() {
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
       </Row>
 
-      <BookingDataBox booking={booking} />
+      {/* <BookingDataBox booking={booking} /> */}
 
       <ButtonGroup>
         <Button variation="secondary" onClick={moveBack}>
